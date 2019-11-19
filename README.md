@@ -361,3 +361,4 @@ cor(partB$Volume.bayer, partB$Volume.dupont)
 
 ### Conclusion-Correlation is very weak, but positive at r=0.001364222. Only 1.861102e-06 variance in dupont volume can be explained by bayer volume. 
 ###################################################
+
