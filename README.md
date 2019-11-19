@@ -125,7 +125,7 @@ View(bee$X.Colonies)
 mean(bee$X.Colonies)
 # Mean = 37175.53
 
-# Select year, volonies, and state
+# Select year, colonies, and state
 # group by state
 # arrange by colonies
 question3 <-bee %>%
@@ -310,15 +310,44 @@ plot(blue_df$Yield.per.acre..Pounds., almonds_df$Yield.per.Acre..pounds.)
 cor(blue_df$Yield.per.acre..Pounds., almonds_df$Yield.per.acre..Pounds.)
 
 # Which two variables had the highest correlation?
+# Dupont Adjusted Closing Stock price and BayerAG Adjusted Closing Stock price have the highest correlation.
 
 ###################################################
 
 ###################################################
 # Question 6-Using Dupont and BayerAG Adjusted Closing Stock price as input, forecast the number of Colonies for the states of California, North Dakota, and Texas if Dupont's stock prices closed at $90 and BayerAG at $80.
 ###################################################
+# Dupont-close at $90
+View(dupont_df)
+close90 <- dupont_df %>%
+  select(Date, Adj.Close) %>%
+  filter(Adj.Close <= 90)
+View(close90)
+# 2009-03-09
+# Year 2009
 
+# Bayer-close at $80
+View(bayer_df)
+close80 <- bayer_df %>%
+  select(Date, Adj.Close) %>%
+  filter(Adj.Close <= 80)
+View(close80)
+# 2013-03-05
+# Year 2013
 
+# States in bee_df
+View(bee_df)
+beestates <- bee_df %>%
+  select(X.State, X.Colonies, Year) %>%
+  filter(X.State=="California" | X.State=="North Dakota" | X.State=="Texas") %>%
+  filter(Year=="2008/09" | Year=="2009/10" | Year=="2012/13" |Year=="2013/24") 
+View(beestates)
 
+# California 625897 2012/13
+# Texas 112502 2012/13
+# North Dakota 289596 2012/13
+
+# The forecasted number of colonies for California, Texas, and North Dakota are 625897, 112502, and 289596 respectively.
 
 ###################################################
 # Part B:
@@ -359,6 +388,5 @@ cor(partB$Volume.bayer, partB$Volume.dupont)
 # Correlation = 0.001364222
 0.001364222**2
 
-### Conclusion-Correlation is very weak, but positive at r=0.001364222. Only 1.861102e-06 variance in dupont volume can be explained by bayer volume. 
+### Conclusion-Correlation is very weak, but positive at r=0.001364222. Only 1.861102e-06% variance in dupont volume can be explained by bayer volume. 
 ###################################################
-
